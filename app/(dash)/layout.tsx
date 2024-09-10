@@ -1,7 +1,7 @@
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
-import session from "#/actions/session";
+import session from "#/actions/auth/session";
 import LayoutX from "#c/LayoutX";
 
 const DashLayout = async ({ children }) => {

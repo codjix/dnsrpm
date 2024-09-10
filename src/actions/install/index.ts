@@ -1,21 +1,21 @@
 "use server";
 import { sql } from "drizzle-orm";
 import { settings, users } from "#db/schema";
-import { installSchema } from "#/utils/validate.zod";
+import { _AppInstall } from "#/utils/validate.zod";
 import RandomStr from "#/utils/RandomStr";
 import { db } from "#db/index";
 
-type InstallProps = {
+type $AppInstall = {
   name: string;
   email: string;
   password: string;
   role: string;
 };
 
-const AppInstall = (data: InstallProps) =>
+const AppInstall = (data: $AppInstall) =>
   new Promise<{ ok: boolean; result: any }>(async (resolve) => {
     try {
-      const values = installSchema.parse(data);
+      const values = _AppInstall.parse(data);
       const isInstalled = await db.query.settings.findFirst({
         where: (settings, { eq }) => eq(settings.key, "installed"),
       });

@@ -22,8 +22,8 @@ import { useState } from "react";
 
 const HostControlForm = () => {
   const [useSSl, setUseSSL] = useState(false);
-  const { start, loading, error } = useTrans(async ({ args, setLoading }) => {
-    console.log(args);
+  const { start, loading, error } = useTrans(async ({ values, setLoading }) => {
+    console.log(values);
     setLoading(false);
     Form.reset();
   });

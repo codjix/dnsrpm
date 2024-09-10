@@ -1,6 +1,6 @@
 import { db } from "#db/index";
 import { proxyHosts } from "#db/schema";
-import session from "./session";
+import session from "./auth/session";
 
 type DnsProps = typeof proxyHosts.$inferSelect;
 type ProxyProps = typeof proxyHosts.$inferSelect;

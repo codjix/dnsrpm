@@ -3,9 +3,9 @@ import { useRouter } from "next/navigation";
 import { Divider, Modal, ModalProps } from "@mantine/core";
 import { createContext, Dispatch, useState } from "react";
 
-import FormInfo from "./forms/FormInfo";
-import FormToggle from "./forms/FormToggle";
-import FormDel from "./forms/FormDel";
+import FormInfo from "./FormInfo";
+import FormToggle from "./FormToggle";
+import FormDel from "./FormDel";
 export * from "./FormTrigger";
 
 export const FormControlCtx = createContext<Dispatch<any>>(null);

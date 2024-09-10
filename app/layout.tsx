@@ -2,7 +2,7 @@ import Head from "next/head";
 import { cookies } from "next/headers";
 import { ColorSchemeScript, createTheme, MantineProvider } from "@mantine/core";
 
-import isInstalled from "#/actions/isInstalled";
+import isInstalled from "#/actions/install/isInstalled";
 import InstallScreen from "#c/InstallScreen";
 import "@mantine/core/styles.css";
 import "#a/styles/globals.scss";

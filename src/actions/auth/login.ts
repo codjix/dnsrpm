@@ -1,20 +1,20 @@
 "use server";
 import { eq, sql } from "drizzle-orm";
 import RandomStr from "#/utils/RandomStr";
-import isInstalled from "./isInstalled";
-import { loginSchema } from "#/utils/validate.zod";
+import isInstalled from "../install/isInstalled";
+import { _AppLogin } from "#/utils/validate.zod";
 import { users } from "#db/schema";
 import { db } from "#db/index";
 
-type LoginProps = {
+type $AppLogin = {
   email: string;
   password: string;
 };
 
-const AppLogin = (data: LoginProps) =>
+const AppLogin = (data: $AppLogin) =>
   new Promise<{ ok: boolean; result: any | string }>(async (resolve) => {
     try {
-      const credentials = loginSchema.parse(data);
+      const credentials = _AppLogin.parse(data);
       const installed = await isInstalled();
       if (!installed) throw new Error("App not installed, but how ?.");
 

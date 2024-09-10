@@ -1,9 +1,9 @@
 "use client";
 import { Dispatch, SetStateAction, useState } from "react";
 
-const useTrans = (
+const useTrans = <$Values extends any>(
   callback: (props: {
-    args: any[];
+    values: $Values;
     error: string;
     loading: boolean;
     setError: Dispatch<SetStateAction<string>>;
@@ -12,11 +12,12 @@ const useTrans = (
 ) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string>(null);
-  const start = (...args: any[]) => {
+  const start = async (values: any) => {
     setError(null);
     setLoading(true);
     try {
-      callback({ args, error, loading, setError, setLoading });
+      await callback({ values, error, loading, setError, setLoading });
+      setLoading(false);
     } catch (error) {
       console.log(error);
       setError(error.message);
