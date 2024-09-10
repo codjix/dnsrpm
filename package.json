@@ -1,0 +1,43 @@
+{
+  "name": "dnsrpm",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --turbo",
+    "build": "next build",
+    "bundle": "cross-env OUTPUT=standalone next build",
+    "start": "next start -p 8000",
+    "db:test": "bun --bun ./database/test.ts",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "drizzle-kit migrate",
+    "db:studio": "drizzle-kit studio",
+    "type-check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@mantine/core": "7.12.2",
+    "@mantine/form": "7.12.2",
+    "@mantine/hooks": "7.12.2",
+    "@mantine/notifications": "7.12.2",
+    "better-sqlite3": "11.3.0",
+    "cross-env": "7.0.3",
+    "drizzle-orm": "0.33.0",
+    "drizzle-zod": "0.5.1",
+    "mantine-form-zod-resolver": "1.1.0",
+    "next": "14.2.5",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "universal-cookie": "7.2.0",
+    "zod": "3.23.8"
+  },
+  "devDependencies": {
+    "@iconify/react": "5.0.2",
+    "@types/better-sqlite3": "7.6.11",
+    "@types/bun": "1.1.9",
+    "@types/node": "22.5.4",
+    "@types/react": "18.3.5",
+    "@types/react-dom": "18.3.0",
+    "drizzle-kit": "0.24.2",
+    "sass": "1.77.8",
+    "typescript": "5.5.4"
+  }
+}

@@ -1,0 +1,6 @@
+[
+  { "label": "Home", "icon": "solar:home-smile-angle-bold", "href": "/" },
+  { "label": "Proxy", "icon": "mdi:proxy-outline", "href": "/proxy" },
+  { "label": "DNS", "icon": "eos-icons:dns", "href": "/dns" },
+  { "label": "Settings", "icon": "solar:settings-bold", "href": "/settings" }
+]

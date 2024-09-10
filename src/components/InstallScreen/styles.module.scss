@@ -1,0 +1,25 @@
+.container {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  @include smaller-than(767px){
+    max-width: 500px;
+    @media (max-height: 675px) {
+      display: block;
+    }
+  }
+  @media (max-height: 400px) {
+    display: block;
+  }
+}
+
+.box {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  @include smaller-than(767px){
+    gap: 20px;
+    grid-template-columns: 1fr;
+  }
+}
