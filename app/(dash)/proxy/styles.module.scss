@@ -1,0 +1,21 @@
+.container {
+  container: proxyHosts / inline-size;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 20ps;
+}
+
+@container proxyHosts (width < 1050px) {
+  .grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@container proxyHosts (width < 800px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}

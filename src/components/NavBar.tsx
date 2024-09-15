@@ -26,9 +26,9 @@ const NavBar = ({ menu, close }: NavBarProps) => {
       </AppShell.Section>
       <AppShell.Section grow my="md" component={ScrollArea}>
         <Stack gap={10}>
-          {pages.map(({ href, label, icon }, index) => (
+          {pages.map(({ href, label, icon }) => (
             <NavLink
-              key={index}
+              key={crypto.randomUUID()}
               component={Link}
               active={pathname == href}
               {...{ href, label, onClick: close }}

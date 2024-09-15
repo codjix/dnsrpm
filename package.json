@@ -6,7 +6,7 @@
     "dev": "next dev --turbo",
     "build": "next build",
     "bundle": "cross-env OUTPUT=standalone next build",
-    "start": "next start -p 8000",
+    "start": "cross-env DATA_DIR=./data next start -p 8000",
     "db:test": "bun --bun ./database/test.ts",
     "db:generate": "drizzle-kit generate",
     "db:migrate": "drizzle-kit migrate",

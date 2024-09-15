@@ -19,8 +19,18 @@ export const proxyHosts = sqliteTable("proxy_hosts", {
   stackId: integer("stack_id").references(() => proxyStacks.id),
   enabled: integer("enabled", { mode: "boolean" }).notNull().default(true),
   isHttps: integer("isHttps", { mode: "boolean" }).notNull().default(false),
+  ws: integer("ws", { mode: "boolean" }).notNull().default(false),
   cert: text("cert"),
   key: text("key"),
+  rewrites: text("rewrites", { mode: "json" }).notNull().default([]).$type<
+    {
+      path: string;
+      protocol: "http" | "https";
+      host: string;
+      port: number;
+      conf?: string;
+    }[]
+  >(),
 });
 
 export const proxyStacksJoins = relations(proxyStacks, ({ many }) => ({

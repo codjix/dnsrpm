@@ -1,5 +1,3 @@
-import { dnsHosts, proxyHosts } from "#db/schema";
-import { createInsertSchema } from "drizzle-zod";
 import zod from "zod";
 
 export const _AppInstall = zod.object({
@@ -25,15 +23,16 @@ export const _FormInfo = {
   },
   proxy_host: {
     init: {},
-    zod: createInsertSchema(proxyHosts, {
+    zod: zod.object({
       domains: zod.array(zod.string().min(3, "Domain must be at least 3 characters")).min(1, "One Domain is required"),
-      key: zod.string().min(100, "invalid key"),
+      key: zod.string().min(10, "invalid key"),
     }),
   },
   dns_host: {
-    init: {},
-    zod: createInsertSchema(dnsHosts, {
+    init: { domain: "", ip: "" },
+    zod: zod.object({
       domain: zod.string().min(3, "Domain must be at least 3 characters"),
+      ip: zod.string().min(7, "Target IP must be at least 7 characters"),
     }),
   },
 };

@@ -1,45 +1,91 @@
-import { db } from "#db/index";
-import { proxyHosts } from "#db/schema";
+"use server";
+import { eq, sql } from "drizzle-orm";
+
 import session from "./auth/session";
+import { dnsHosts, proxyHosts } from "#db/schema";
+import { db } from "#db/index";
 
-type DnsProps = typeof proxyHosts.$inferSelect;
+type DnsProps = typeof dnsHosts.$inferSelect;
 type ProxyProps = typeof proxyHosts.$inferSelect;
-type CreateProps<T> = T extends "dns" ? DnsProps : T extends "proxy" ? ProxyProps : never;
+type HostProps<T> = T extends "dns" ? DnsProps : T extends "proxy" ? ProxyProps : never;
 
-export const CreateHost = <T extends "dns" | "proxy">(table: T, prop: CreateProps<T>) =>
-  new Promise<{ ok: boolean; result: any | string }>(async (resolve) => {
+export const HostCreate = <T extends "dns" | "proxy">(table: T, prop: HostProps<T>) =>
+  new Promise<{ ok: boolean; result: any }>(async (resolve) => {
     try {
       const user = await session();
       if (!user) throw new Error("Not authentcated");
-      
-      //logic
+      const hosts = table == "dns" ? dnsHosts : proxyHosts;
+      db.insert(hosts)
+        .values(prop)
+        .then((res) => {
+          resolve({ ok: true, result: "Host created successfully !" });
+        })
+        .catch((error) => resolve({ ok: false, result: error.mesage }));
     } catch (error) {
       resolve({ ok: false, result: error.mesage });
     }
   });
 
-export const UpdateHost = (table: "dns" | "proxy", id: number) =>
-  new Promise<{ ok: boolean; result: any | string }>(async (resolve) => {
+export const HostUpdate = <T extends "dns" | "proxy">(table: T, prop: HostProps<T>) =>
+  new Promise<{ ok: boolean; result: any }>(async (resolve) => {
     try {
-      //logic
+      const user = await session();
+      if (!user) throw new Error("Not authentcated");
+      const hosts = table == "dns" ? dnsHosts : proxyHosts;
+      db.update(hosts)
+        .set({ ...prop, updated: sql`(CURRENT_TIMESTAMP)` })
+        .where(eq(hosts.id, prop.id))
+        .then((res: any) => {
+          if (res.changes > 0) {
+            resolve({ ok: true, result: "Host updated successfully !" });
+          } else {
+            resolve({ ok: false, result: "No changes !" });
+          }
+        })
+        .catch((error) => resolve({ ok: false, result: error.mesage }));
     } catch (error) {
       resolve({ ok: false, result: error.mesage });
     }
   });
 
-export const DelHost = (table: "dns" | "proxy", id: number) =>
-  new Promise<{ ok: boolean; result: any | string }>(async (resolve) => {
+export const HostToggle = (table: "dns" | "proxy", id: number, enabled: boolean) =>
+  new Promise<{ ok: boolean; result: any }>(async (resolve) => {
     try {
-      //logic
+      const user = await session();
+      if (!user) throw new Error("Not authentcated");
+      const hosts = table == "dns" ? dnsHosts : proxyHosts;
+      db.update(hosts)
+        .set({ enabled, updated: sql`(CURRENT_TIMESTAMP)` })
+        .where(eq(hosts.id, id))
+        .then((res: any) => {
+          if (res.changes > 0) {
+            resolve({ ok: true, result: "Host updated successfully !" });
+          } else {
+            resolve({ ok: false, result: "No changes !" });
+          }
+        })
+        .catch((error) => resolve({ ok: false, result: error.mesage }));
     } catch (error) {
       resolve({ ok: false, result: error.mesage });
     }
   });
 
-export const ToggleHost = (table: "dns" | "proxy", id: number) =>
-  new Promise<{ ok: boolean; result: any | string }>(async (resolve) => {
+export const HostDel = (table: "dns" | "proxy", id: number) =>
+  new Promise<{ ok: boolean; result: any }>(async (resolve) => {
     try {
-      //logic
+      const user = await session();
+      if (!user) throw new Error("Not authentcated");
+      const hosts = table == "dns" ? dnsHosts : proxyHosts;
+      db.delete(hosts)
+        .where(eq(hosts.id, id))
+        .then((res: any) => {
+          if (res.changes > 0) {
+            resolve({ ok: true, result: "Host deleted successfully !" });
+          } else {
+            resolve({ ok: false, result: "No changes !" });
+          }
+        })
+        .catch((error) => resolve({ ok: false, result: error.mesage }));
     } catch (error) {
       resolve({ ok: false, result: error.mesage });
     }

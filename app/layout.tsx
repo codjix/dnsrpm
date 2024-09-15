@@ -1,10 +1,12 @@
 import Head from "next/head";
 import { cookies } from "next/headers";
 import { ColorSchemeScript, createTheme, MantineProvider } from "@mantine/core";
+import { Notifications } from "@mantine/notifications";
 
-import isInstalled from "#/actions/install/isInstalled";
 import InstallScreen from "#c/InstallScreen";
+import isInstalled from "#/actions/install/isInstalled";
 import "@mantine/core/styles.css";
+import "@mantine/notifications/styles.css";
 import "#a/styles/globals.scss";
 
 export const metadata = {
@@ -32,6 +34,7 @@ const RootLayout = async ({ children }: { children: React.ReactNode }) => {
       <body>
         <MantineProvider theme={theme} defaultColorScheme={(Co.get("color-scheme")?.value as any) ?? "auto"}>
           {installed ? children : <InstallScreen />}
+          <Notifications />
         </MantineProvider>
       </body>
     </html>

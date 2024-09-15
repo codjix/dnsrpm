@@ -1,7 +1,7 @@
 "use client";
 import { useEffect } from "react";
 import { ActionIcon, AppShell, Container, Flex, Group, rem, Text } from "@mantine/core";
-import { useDisclosure, useHeadroom } from "@mantine/hooks";
+import { useDisclosure, useHeadroom, useMediaQuery } from "@mantine/hooks";
 import { Icon } from "@iconify/react";
 import Cookies from "universal-cookie";
 
@@ -15,6 +15,7 @@ const LayoutX = ({ children, wideOpen, user }: { children: React.ReactNode; wide
   const pinned = useHeadroom({ fixedAt: 120 });
   const [mOpened, mHandlers] = useDisclosure();
   const [wOpened, wHandlers] = useDisclosure(wideOpen !== "false");
+  const wideView = useMediaQuery("(min-width: 767px)");
 
   useEffect(() => Co.set("wide-open", wOpened), [wOpened]);
 
@@ -46,9 +47,9 @@ const LayoutX = ({ children, wideOpen, user }: { children: React.ReactNode; wide
   };
 
   return (
-    <AppShell layout="alt" padding="md" {...shellProps}>
+    <AppShell layout="alt" {...shellProps}>
       <AppShell.Header>
-        <Container h="100%" style={{ width: "100%", maxWidth: "1200px" }}>
+        <Container h="100%" style={{ width: "100%", maxWidth: "1200px" }} px={20}>
           <Group h="100%" justify="space-between" gap={10}>
             <Flex h="100%" align="center" gap={10}>
               {wMenu}
@@ -61,11 +62,13 @@ const LayoutX = ({ children, wideOpen, user }: { children: React.ReactNode; wide
           </Group>
         </Container>
       </AppShell.Header>
-      <AppShell.Navbar style={blur} px="md">
+      <AppShell.Navbar style={blur} px="md" zIndex={wideView ? null : 9999}>
         <NavBar menu={mMenu} close={mHandlers.close} />
       </AppShell.Navbar>
-      <AppShell.Main pt={`calc(${rem(60)} + var(--mantine-spacing-md))`}>
-        <Container style={{ width: "100%", maxWidth: "1200px" }}>{children}</Container>
+      <AppShell.Main pt={rem(60)}>
+        <Container style={{ width: "100%", maxWidth: "1200px" }} p={20}>
+          {children}
+        </Container>
         <Affix />
       </AppShell.Main>
     </AppShell>

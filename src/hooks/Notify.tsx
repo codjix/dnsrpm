@@ -6,8 +6,8 @@ import { Icon, IconifyIcon } from "@iconify/react";
 interface NotifyProps {
   title: React.ReactNode;
   message: React.ReactNode;
-  color: DefaultMantineColor;
-  icon: string | IconifyIcon;
+  color?: DefaultMantineColor;
+  icon?: string | IconifyIcon;
 }
 
 const Notify = ({ title, message, color = null, icon }: NotifyProps) => {
@@ -19,7 +19,7 @@ const Notify = ({ title, message, color = null, icon }: NotifyProps) => {
     autoClose: true,
     icon: icon ? (
       <ThemeIcon color={color} size="35px">
-        <Icon style={{ width: "70%", height: "70%" }} icon={icon} />
+        <Icon style={{ width: "70%", height: "70%" }} icon={icon ?? "tabler:info-circle"} />
       </ThemeIcon>
     ) : null,
   });

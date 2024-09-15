@@ -1,0 +1,21 @@
+.container {
+  container: dnsHosts / inline-size;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 20px;
+}
+
+@container dnsHosts (width < 800px) {
+  .grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@container dnsHosts (width < 560px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}

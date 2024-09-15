@@ -17,10 +17,10 @@ var page = async () => {
     <>
       <h1>Dashboard</h1>
       <SimpleGrid cols={{ base: 1, sm: 2 }}>
-        {["Proxy", "DNS"].map((listName, index) => {
+        {["Proxy", "DNS"].map((listName) => {
           const list = listName.toLowerCase() as "proxy" | "dns";
           return (
-            <Card withBorder shadow="sm" h="fit-content" mih={350} radius={20} key={index}>
+            <Card withBorder shadow="sm" h="fit-content" mih={350} key={crypto.randomUUID()}>
               <Anchor component={Link} href={"/" + list}>
                 <Flex justify="space-between" mb={10}>
                   <Text>{listName} Stacks</Text>
@@ -29,10 +29,10 @@ var page = async () => {
               </Anchor>
               <Divider mb={20} />
               <Stack>
-                {stacks[list].map((stack, index) => (
+                {stacks[list].map((stack) => (
                   <Button
                     h={50}
-                    key={index}
+                    key={crypto.randomUUID()}
                     href={`/${list}#stack-${stack.id + 1}`}
                     component={Link}
                     variant="default"

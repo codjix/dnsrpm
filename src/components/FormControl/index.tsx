@@ -20,33 +20,33 @@ const FormControl = ({ state, table, children }: FormControlProps) => {
   const router = useRouter();
   const [data, setData] = useState(null);
 
-  const formArrays = ["stack", "host"].map((target: "stack" | "host") => {
-    const actions = [
-      { actionName: "New", Form: FormInfo, view: "modal" },
-      { actionName: "Edit", Form: FormInfo, view: "modal" },
-      { actionName: "Enable", Form: FormToggle, view: "dialog" },
-      { actionName: "Disable", Form: FormToggle, view: "dialog" },
-      { actionName: "Delete", Form: FormDel, view: "dialog" },
-    ];
-    return actions.map(({ actionName, Form, view }) => {
-      const action = actionName.toLowerCase();
+  const formArrays = ["stack", "host"].map((target: "stack" | "host") =>
+    [
+      { label: "New", Form: FormInfo, view: "modal" },
+      { label: "Edit", Form: FormInfo, view: "modal" },
+      { label: "Enable", Form: FormToggle, view: "dialog" },
+      { label: "Disable", Form: FormToggle, view: "dialog" },
+      { label: "Delete", Form: FormDel, view: "dialog" },
+    ].map(({ label, Form, view }) => {
+      const action = label.toLowerCase();
+      const tableName = table == "dns" ? "DNS" : "Proxy";
       return {
-        [[action, target].join("-")]: {
-          title: [actionName, table, target].join(" "),
+        [[action.toLowerCase(), target].join("-")]: {
+          title: [label, tableName, target].join(" "),
           content: <Form {...{ table, data, target, action }} />,
           view,
         },
       };
-    });
-  });
+    })
+  );
 
   const formObjects = formArrays[0].concat(formArrays[1]);
   const forms = Object.assign({}, ...formObjects);
 
   type ModalType = { title: string; content: React.ReactNode; view: "modal" | "dialog" };
-  const modal = forms[state?.action] as ModalType;
+  const modal: ModalType = forms[state?.action];
   const modalProps: ModalProps = {
-    zIndex: 9999,
+    zIndex: 300,
     lockScroll: false,
     title: modal?.title ?? "",
     centered: modal?.view == "dialog" ? true : false,
@@ -54,6 +54,7 @@ const FormControl = ({ state, table, children }: FormControlProps) => {
     opened: Object.keys(forms).includes(state?.action),
     onClose: () => {
       router.push("/" + table);
+      router.refresh();
       setData(null);
     },
   };

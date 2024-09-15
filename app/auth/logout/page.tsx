@@ -9,6 +9,7 @@ const page = () => {
   useEffect(() => {
     Co.remove("token");
     router.push("/auth/login");
+    router.refresh();
   }, []);
   return <></>;
 };

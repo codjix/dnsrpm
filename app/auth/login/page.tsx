@@ -50,6 +50,7 @@ const page = () => {
           if (res.ok) {
             Co.set("token", res.result);
             router.push("/");
+            router.refresh();
           } else {
             setError(res.result);
             setLoading(false);
