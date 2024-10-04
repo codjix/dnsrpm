@@ -5,13 +5,14 @@ import { useDisclosure, useHeadroom, useMediaQuery } from "@mantine/hooks";
 import { Icon } from "@iconify/react";
 import Cookies from "universal-cookie";
 
+import SaveChanges from "./SaveChanges";
 import AccountMenu from "./AccountMenu";
 import NavBar from "./NavBar";
 import Affix from "./ui/Affix";
 import Link from "next/link";
-import ApplyBackEnd from "#/actions/ApplyBackend";
 
-const LayoutX = ({ children, wideOpen, user }: { children: React.ReactNode; wideOpen?: string; user: any }) => {
+type $LayoutX = { children: React.ReactNode; wideOpen?: string; user: any };
+const LayoutX = ({ children, wideOpen, user }: $LayoutX) => {
   const Co = new Cookies(null, { path: "/" });
   const pinned = useHeadroom({ fixedAt: 120 });
   const [mOpened, mHandlers] = useDisclosure();
@@ -23,11 +24,7 @@ const LayoutX = ({ children, wideOpen, user }: { children: React.ReactNode; wide
   const shellProps = {
     header: { height: 70, collapsed: !pinned, offset: true },
     navbar: { width: 300, breakpoint: "sm", collapsed: { desktop: !wOpened, mobile: !mOpened } },
-    aside: {
-      width: 300,
-      breakpoint: "md",
-      collapsed: { desktop: true, mobile: true },
-    },
+    aside: { width: 300, breakpoint: "md", collapsed: { desktop: true, mobile: true } },
   };
 
   const mMenu = (
@@ -60,9 +57,7 @@ const LayoutX = ({ children, wideOpen, user }: { children: React.ReactNode; wide
               </Text>
             </Flex>
             <Flex h="100%" align="center" gap={10}>
-              <ActionIcon variant="default" size="lg" onClick={() => ApplyBackEnd().then(console.log)}>
-                <Icon icon="tabler:square-rounded-arrow-down" />
-              </ActionIcon>
+              <SaveChanges />
               <AccountMenu user={user} />
             </Flex>
           </Group>
