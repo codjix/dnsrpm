@@ -58,7 +58,6 @@ const page = () => {
         })
         .catch((err) => setError(err));
     } catch (error) {
-      console.log(error);
       setError(error.message);
       setLoading(false);
     }

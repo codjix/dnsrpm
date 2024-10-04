@@ -9,6 +9,7 @@ import AccountMenu from "./AccountMenu";
 import NavBar from "./NavBar";
 import Affix from "./ui/Affix";
 import Link from "next/link";
+import ApplyBackEnd from "#/actions/ApplyBackend";
 
 const LayoutX = ({ children, wideOpen, user }: { children: React.ReactNode; wideOpen?: string; user: any }) => {
   const Co = new Cookies(null, { path: "/" });
@@ -58,7 +59,12 @@ const LayoutX = ({ children, wideOpen, user }: { children: React.ReactNode; wide
                 Dnsrpm
               </Text>
             </Flex>
-            <AccountMenu user={user} />
+            <Flex h="100%" align="center" gap={10}>
+              <ActionIcon variant="default" size="lg" onClick={() => ApplyBackEnd().then(console.log)}>
+                <Icon icon="tabler:square-rounded-arrow-down" />
+              </ActionIcon>
+              <AccountMenu user={user} />
+            </Flex>
           </Group>
         </Container>
       </AppShell.Header>
@@ -69,8 +75,8 @@ const LayoutX = ({ children, wideOpen, user }: { children: React.ReactNode; wide
         <Container style={{ width: "100%", maxWidth: "1200px" }} p={20}>
           {children}
         </Container>
-        <Affix />
       </AppShell.Main>
+      <Affix />
     </AppShell>
   );
 };

@@ -24,7 +24,7 @@ const AppInstall = (data: $AppInstall) =>
           ...values,
           password: Bun.password.hashSync(values.password, "bcrypt"),
           token: RandomStr(36, "token_"),
-          updated: sql`(CURRENT_TIMESTAMP)`,
+          updated: new Date().toUTCString(),
         } as any);
         const installed = await db.insert(settings).values({
           key: "installed",

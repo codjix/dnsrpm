@@ -41,19 +41,18 @@ const FormInfo = ({ table, target, action, data }: $FormInfo) => {
           if (ok) {
             router.push("/" + table);
             router.refresh();
-            Notify({ title: "Success !", color: "green", message: result, icon: "tabler:check" });
+            Notify({ title: "Success", color: "green", message: result, icon: "tabler:check" });
           } else Notify({ title: "Error !", color: "red", message: result, icon: "tabler:x" });
         });
       } else {
         const srvAction = action == "new" ? HostCreate : HostUpdate;
-        srvAction(table, { ...values, stackId: data.stackid }).then(({ ok, result }) => {
+        srvAction(table, { ...values, stackId: data.stackId }).then(({ ok, result }) => {
           if (ok) {
             router.push("/" + table);
             router.refresh();
-            Notify({ title: "Success !", color: "green", message: result, icon: "tabler:check" });
+            Notify({ title: "Success", color: "green", message: result, icon: "tabler:check" });
           } else {
             Notify({ title: "Error !", color: "red", message: result, icon: "tabler:x" });
-            console.log(result);
           }
         });
       }
@@ -76,16 +75,10 @@ const FormInfo = ({ table, target, action, data }: $FormInfo) => {
         <Stack gap={10} mt={10}>
           {error && <Alert variant="light" color="red" title={error} icon={<Icon icon="tabler:info-circle" />} />}
           {target == "stack" && (
-            <TextInput label={[target, "name"].join(" ")} placeholder="ex: website" {...Form.getInputProps("name")} />
+            <TextInput label="Stack name" placeholder="ex: website" {...Form.getInputProps("name")} />
           )}
           {target == "host" && (table == "dns" ? <DnsForm Form={Form} /> : <ProxyForm Form={Form} />)}
-          <Button
-            type="submit"
-            onClick={() => {
-              setError(null);
-              if (!Form.isValid) setError("Form is not valid !");
-            }}
-          >
+          <Button type="submit" onClick={() => (Form.isValid ? setError(null) : setError("Form is not valid !"))}>
             {action == "new" ? "Create" : "Update"}
           </Button>
         </Stack>

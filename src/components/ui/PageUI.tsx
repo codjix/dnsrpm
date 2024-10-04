@@ -1,18 +1,18 @@
 "use client";
 import { Icon } from "@iconify/react";
-import { Overlay, Flex, Button, Image, ActionIcon, HoverCard, Stack, Text } from "@mantine/core";
-import { useMediaQuery } from "@mantine/hooks";
+import { Overlay, Flex, Button, Image, ActionIcon, HoverCard, Stack, Text, CardProps } from "@mantine/core";
 
 import EmptyBox from "./EmptyBox";
 import { FormTrigger } from "#c/FormControl";
 import empty from "#a/images/empty.png";
 
-export const NoStacks = ({ target }) => (
+type $NoStacks = { target: "dns" | "proxy"; props?: CardProps };
+export const NoStacks = ({ target, props }: $NoStacks) => (
   <EmptyBox
     title="No stacks yet"
     icon={<Image w={100} src={empty.src} />}
     description="Get started by adding your first hosts stack."
-    props={{ withBorder: true, shadow: "sm", mih: 400 }}
+    props={{ withBorder: true, shadow: "sm", ...props }}
   >
     <FormTrigger to={`/${target}?action=new-stack`}>
       <Button variant="default">New stack</Button>
@@ -20,7 +20,8 @@ export const NoStacks = ({ target }) => (
   </EmptyBox>
 );
 
-export const StackDisabled = ({ target, data }) => (
+type $StackDisabled = { target: "dns" | "proxy"; data: any };
+export const StackDisabled = ({ target, data }: $StackDisabled) => (
   <Overlay radius={10}>
     <Flex align="center" justify="center" h="100%">
       <EmptyBox
@@ -40,14 +41,14 @@ export const StackDisabled = ({ target, data }) => (
   </Overlay>
 );
 
-export const NoHosts = ({ target, data }) => {
-  const wideView = useMediaQuery("(min-width: 767px)");
+type $NoHosts = { target: "dns" | "proxy"; data: any };
+export const NoHosts = ({ target, data }: $NoHosts) => {
   return (
     <EmptyBox
       title="No hosts yet"
       icon={<Image w={100} src={empty.src} />}
       description="Get started by adding your first host."
-      props={{ withBorder: true, shadow: "sm", mih: wideView ? 400 : 250, mt: 20 }}
+      props={{ withBorder: true, shadow: "sm", mt: 20 }}
     >
       <FormTrigger to={`/${target}?action=new-host`} data={data}>
         <Button variant="default" children="New host" />
@@ -56,7 +57,12 @@ export const NoHosts = ({ target, data }) => {
   );
 };
 
-export const HoverMenu = ({ table, target, data }) => {
+type $HoverMenu = {
+  table: "DNS" | "Proxy";
+  target: "Stack" | "Host";
+  data: any;
+};
+export const HoverMenu = ({ table, target, data }: $HoverMenu) => {
   const _table = table.toLowerCase();
   const _target = target.toLowerCase();
   return (
@@ -69,7 +75,7 @@ export const HoverMenu = ({ table, target, data }) => {
       <HoverCard.Dropdown miw={200}>
         <Stack gap={10}>
           <Text>
-            {table} {target} #{data.id + 1}
+            {table} {target} #{data.id}
           </Text>
           <FormTrigger to={`/${_table}?action=edit-${_target}`} data={data}>
             <Button fullWidth variant="default" leftSection={<Icon icon="tabler:edit" />}>

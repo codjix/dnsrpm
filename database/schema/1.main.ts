@@ -1,12 +1,11 @@
-import { sql } from "drizzle-orm";
 import { sqliteTable, text, integer } from "drizzle-orm/sqlite-core";
 
 export const MainCols = {
   id: integer("id").primaryKey({ autoIncrement: true }).notNull(),
-  created: text("created").default(sql`(CURRENT_TIMESTAMP)`),
+  created: text("created").default(new Date().toUTCString()),
   updated: text("updated")
     .notNull()
-    .default(sql`(CURRENT_TIMESTAMP)`),
+    .default(new Date().toUTCString()),
 };
 
 export const settings = sqliteTable("settings", {

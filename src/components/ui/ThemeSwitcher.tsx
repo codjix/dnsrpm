@@ -3,12 +3,13 @@ import { Icon, IconifyIcon } from "@iconify/react";
 import { ActionIcon, SegmentedControl, Stack, Text, useMantineColorScheme } from "@mantine/core";
 import Cookies from "universal-cookie";
 
-type ThemeSwitcherProps = {
+type $ThemeSwitcher = {
   wide?: boolean;
   fullWidth?: boolean;
+  noLabels?: boolean;
 };
 
-const ThemeSwitcher = ({ wide, fullWidth }: ThemeSwitcherProps) => {
+const ThemeSwitcher = ({ wide, fullWidth, noLabels }: $ThemeSwitcher) => {
   const { colorScheme, setColorScheme } = useMantineColorScheme();
   const Co = new Cookies(null, { path: "/" });
 
@@ -16,9 +17,9 @@ const ThemeSwitcher = ({ wide, fullWidth }: ThemeSwitcherProps) => {
     icon,
     value: title.toLowerCase(),
     label: (
-      <Stack align="center" gap={5}>
+      <Stack align="center" gap={5} aria-label={title} title={title}>
         <Icon height={20} icon={icon} />
-        <Text h={20}>{title}</Text>
+        {!noLabels && <Text h={20}>{title}</Text>}
       </Stack>
     ),
   });
@@ -36,9 +37,9 @@ const ThemeSwitcher = ({ wide, fullWidth }: ThemeSwitcherProps) => {
     <SegmentedControl
       my="md"
       size="xl"
-      fullWidth={fullWidth}
       data={schemes}
       value={colorScheme}
+      fullWidth={fullWidth}
       onChange={(newScheme: any) => {
         Co.set("color-scheme", newScheme);
         setColorScheme(newScheme);
@@ -49,6 +50,8 @@ const ThemeSwitcher = ({ wide, fullWidth }: ThemeSwitcherProps) => {
       size="lg"
       color="gray"
       variant="subtle"
+      title={scheme?.value}
+      aria-label={scheme.value}
       onClick={() => {
         const newScheme: any = schemes[(index + 1) % 3];
         Co.set("color-scheme", newScheme.value);

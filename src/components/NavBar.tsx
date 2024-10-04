@@ -7,12 +7,12 @@ import { Icon } from "@iconify/react";
 import ThemeSwitcher from "./ui/ThemeSwitcher";
 import pages from "#a/res/pages.json";
 
-type NavBarProps = {
+type $NavBar = {
   menu: React.ReactNode;
   close: (event: React.MouseEvent<HTMLAnchorElement>) => void;
 };
 
-const NavBar = ({ menu, close }: NavBarProps) => {
+const NavBar = ({ menu, close }: $NavBar) => {
   const pathname = usePathname();
 
   return (
@@ -24,11 +24,11 @@ const NavBar = ({ menu, close }: NavBarProps) => {
         </Flex>
         <Divider />
       </AppShell.Section>
-      <AppShell.Section grow my="md" component={ScrollArea}>
+      <AppShell.Section grow my={20} component={ScrollArea}>
         <Stack gap={10}>
-          {pages.map(({ href, label, icon }) => (
+          {pages.map(({ href, label, icon }, index) => (
             <NavLink
-              key={crypto.randomUUID()}
+              key={index}
               component={Link}
               active={pathname == href}
               {...{ href, label, onClick: close }}

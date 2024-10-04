@@ -1,0 +1,23 @@
+.container {
+  container: dash / inline-size;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.card {
+  height: fit-content;
+  min-height: 355px;
+}
+
+@container dash (width < 800px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+  .card {
+    min-height: inherit;
+  }
+}

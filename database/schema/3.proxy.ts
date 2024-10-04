@@ -20,8 +20,8 @@ export const proxyHosts = sqliteTable("proxy_hosts", {
   enabled: integer("enabled", { mode: "boolean" }).notNull().default(true),
   isHttps: integer("isHttps", { mode: "boolean" }).notNull().default(false),
   ws: integer("ws", { mode: "boolean" }).notNull().default(false),
-  cert: text("cert"),
-  key: text("key"),
+  cert: text("cert").notNull().default(""),
+  key: text("key").notNull().default(""),
   rewrites: text("rewrites", { mode: "json" }).notNull().default([]).$type<
     {
       path: string;

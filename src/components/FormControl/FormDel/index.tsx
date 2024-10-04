@@ -23,7 +23,7 @@ const FormDel = ({ table, target, data }: FormDelProps) => {
       if (res.ok) {
         router.push("/" + table);
         router.refresh();
-        Notify({ title: "Success !", color: "green", message: res.result, icon: "tabler:check" });
+        Notify({ title: "Success", color: "green", message: res.result, icon: "tabler:check" });
       } else Notify({ title: "Error !", color: "red", message: res.result, icon: "tabler:x" });
     } catch (error) {
       Notify({ title: "Error !", color: "red", message: error.message, icon: "tabler:x" });

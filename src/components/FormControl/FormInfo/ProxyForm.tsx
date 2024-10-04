@@ -8,7 +8,6 @@ type $ProxyForm = {
 };
 
 const ProxyForm = ({ Form }: $ProxyForm) => {
-  
   return (
     <>
       <Tabs variant="pills" defaultValue="details">
@@ -32,19 +31,24 @@ const ProxyForm = ({ Form }: $ProxyForm) => {
             label="Domains"
             placeholder="Ex: example.com, example.io"
             {...Form.getInputProps("domains")}
-            required
+            withAsterisk
           />
           <div style={{ display: "grid", gridTemplateColumns: "auto 1fr auto", gap: 10 }}>
             <Select
               w={80}
-              required
+              withAsterisk
               label="Protocol"
-              defaultValue="http"
+              placeholder="http"
               {...Form.getInputProps("targetProtocol")}
               data={["http", "https"]}
               allowDeselect={false}
             />
-            <TextInput label="Hostname" placeholder="ex: 172.0.0.2" {...Form.getInputProps("targetHost")} required />
+            <TextInput
+              label="Hostname"
+              placeholder="ex: 172.0.0.2"
+              {...Form.getInputProps("targetHost")}
+              withAsterisk
+            />
             <NumberInput
               w={100}
               min={0}
@@ -52,7 +56,7 @@ const ProxyForm = ({ Form }: $ProxyForm) => {
               placeholder="ex: 80"
               clampBehavior="strict"
               {...Form.getInputProps("targetPort")}
-              required
+              withAsterisk
             />
           </div>
           <Checkbox label="Allow Websocket" {...Form.getInputProps("ws", { type: "checkbox" })} />
@@ -70,14 +74,12 @@ const ProxyForm = ({ Form }: $ProxyForm) => {
             <>
               <Textarea
                 rows={4}
-                required
                 label="Certificate"
                 {...Form.getInputProps("cert")}
                 placeholder="-----BEGIN CERTIFICATE-----"
               />
               <Textarea
                 rows={4}
-                required
                 label="Certificate key"
                 {...Form.getInputProps("key")}
                 placeholder="-----BEGIN PRIVATE KEY-----"

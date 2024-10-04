@@ -1,21 +1,9 @@
 "use server";
-import { eq, sql } from "drizzle-orm";
+import { eq } from "drizzle-orm";
 
-import session from "./auth/session";
+import { withPromise } from "#/utils/withPromise";
 import { dnsHosts, dnsStacks, proxyHosts, proxyStacks } from "#db/schema";
 import { db } from "#db/index";
-
-type $resolve = (result: { ok: boolean; result: any }) => void;
-const withPromise = (callback: (r: $resolve) => void) =>
-  new Promise<{ ok: boolean; result: any }>(async (resolve) => {
-    try {
-      const user = await session();
-      if (!user) throw new Error("Not authentcated");
-      callback(resolve);
-    } catch (error) {
-      resolve({ ok: false, result: error.mesage });
-    }
-  });
 
 export const StackCreate = (table: "dns" | "proxy", data: { id?: number; name: string }) =>
   withPromise((resolve) => {
@@ -33,7 +21,7 @@ export const StackUpdate = (table: "dns" | "proxy", data: { id: number; name: st
   withPromise((resolve) => {
     const stack = table == "dns" ? dnsStacks : proxyStacks;
     db.update(stack)
-      .set({ name: data.name, updated: sql`(CURRENT_TIMESTAMP)` } as any)
+      .set({ name: data.name, updated: new Date().toUTCString() } as any)
       .where(eq(stack.id, data.id))
       .then((res: any) => {
         if (res.changes > 0) {
@@ -49,7 +37,7 @@ export const StackToggle = (table: "dns" | "proxy", id: number, enabled: boolean
   withPromise((resolve) => {
     const stack = table == "dns" ? dnsStacks : proxyStacks;
     db.update(stack)
-      .set({ enabled, updated: sql`(CURRENT_TIMESTAMP)` } as any)
+      .set({ enabled, updated: new Date().toUTCString() } as any)
       .where(eq(stack.id, id))
       .then((res: any) => {
         if (res.changes > 0) {

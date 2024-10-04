@@ -28,7 +28,7 @@ const AppLogin = (data: $AppLogin) =>
 
       const token = RandomStr(36, "token_");
       db.update(users)
-        .set({ token, updated: sql`(CURRENT_TIMESTAMP)` } as any)
+        .set({ token, updated: new Date().toUTCString() } as any)
         .where(eq(users.email, credentials.email))
         .then(() => resolve({ ok: true, result: token }))
         .catch((err) => resolve({ ok: false, result: err.message }));
