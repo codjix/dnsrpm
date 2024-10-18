@@ -5,10 +5,9 @@ import { db } from "#db/index";
 const session = async () => {
   const Co = cookies();
   const token = Co.get("token");
-
-  var user = await db.query.users.findFirst({
-    where: (users, { eq }) => eq(users.token, token.value),
-  });
+  const where = (users: Record<string, any>, { eq }) =>
+    eq(users.token, token.value);
+  var user = await db.query.users.findFirst({ where });
   delete user?.password;
   delete user?.token;
   return user;
