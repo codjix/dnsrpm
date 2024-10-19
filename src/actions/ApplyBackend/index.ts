@@ -6,11 +6,22 @@ import DnsWriter from "./DnsWriter";
 
 const ApplyBackEnd = () =>
   withPromise(async (resolve) => {
+    const errMsg = { error: { ok: false, message: "Timeout" } };
+    setTimeout(() => resolve({ ok: false, result: errMsg }), 10000);
     const targetDir = process.env.DATA_DIR;
     const stacks = await GetAllStacks("expand", true);
     Bun.write(`${targetDir}/all-data.json`, JSON.stringify(stacks));
     const proxy = await ProxyWriter(stacks.proxy, targetDir);
     const dns = await DnsWriter(stacks.dns, targetDir);
+    if (process.env.NODE_ENV == "production") {
+      /**
+       * ToDo: test configurations
+       * - dnsmasq --test
+       * - nginx -t
+       */
+      await Bun.$`rc-service dnsmasq restart`;
+      await Bun.$`rc-service nginx restart`;
+    }
 
     resolve({
       ok: proxy && dns,

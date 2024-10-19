@@ -21,6 +21,7 @@ const ProxyWriter = (stacks: $ProxyStack[], targetDir: string) =>
           .catch(() => resolve(false))
       )
     );
+    resolve(true);
   });
 
 export default ProxyWriter;
@@ -42,7 +43,7 @@ const template = `server {
   server_name{% for domain in host.domains %} {{ domain }}{% endfor %};
   
   # Logging
-  access_log /app/data/logs/nginx/stack-{{ host.stackId }}-host-{{ host.id }}-access.log proxy;
+  access_log /app/data/logs/nginx/stack-{{ host.stackId }}-host-{{ host.id }}-access.log;
   error_log /app/data/logs/nginx/stack-{{ host.stackId }}-host-{{ host.id }}-error.log warn;
   {% if host.conf %}
   # Custom configurations

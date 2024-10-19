@@ -2,6 +2,7 @@
 import {
   ActionIcon,
   AppShell,
+  Button,
   Container,
   Flex,
   Group,
@@ -77,9 +78,12 @@ const LayoutX = ({ children, wideOpen, user }: $LayoutX) => {
             </Flex>
             <Flex h="100%" align="center" gap={10}>
               <SaveTrigger>
-                <ActionIcon variant="default" size="lg">
-                  <Icon icon="tabler:square-rounded-arrow-down" />
-                </ActionIcon>
+                <Button variant="default">
+                  <Group gap={10}>
+                    <Icon width={20} icon="mdi:content-save-outline" />
+                    <Text>Save</Text>
+                  </Group>
+                </Button>
               </SaveTrigger>
               <AccountMenu user={user} />
             </Flex>

@@ -19,6 +19,7 @@ const DnsWriter = async (stacks: $DnsStack[], targetDir: string) =>
         })
         .catch(() => resolve(false))
     );
+    resolve(true);
   });
 
 export default DnsWriter;

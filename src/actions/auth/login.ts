@@ -23,12 +23,16 @@ const AppLogin = (data: $AppLogin) =>
       });
       if (!user) throw new Error("Email not found.");
 
-      const validPass = Bun.password.verifySync(credentials.password, user.password, "bcrypt");
+      const validPass = Bun.password.verifySync(
+        credentials.password,
+        user.password,
+        "bcrypt"
+      );
       if (!validPass) throw new Error("Invalid password.");
 
       const token = RandomStr(36, "token_");
       db.update(users)
-        .set({ token, updated: new Date().toUTCString() } as any)
+        .set({ token, updated: sql`CURRENT_TIMESTAMP` } as any)
         .where(eq(users.email, credentials.email))
         .then(() => resolve({ ok: true, result: token }))
         .catch((err) => resolve({ ok: false, result: err.message }));
