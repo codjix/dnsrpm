@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import { Icon } from "@iconify/react";
 
 import ThemeSwitcher from "./ui/ThemeSwitcher";
-import pages from "#a/res/pages.json";
+import pages from "@a/res/pages.json";
 
 type $NavBar = {
   menu: React.ReactNode;

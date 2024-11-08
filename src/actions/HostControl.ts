@@ -1,9 +1,9 @@
 "use server";
 import { eq, sql } from "drizzle-orm";
 
-import { withPromise } from "#/utils/withPromise";
-import { dnsHosts, proxyHosts } from "#db/schema";
-import { db } from "#db/index";
+import { withPromise } from "@u/withPromise";
+import { dnsHosts, proxyHosts } from "@db/schema";
+import { db } from "@db/index";
 
 type DnsProps = typeof dnsHosts.$inferSelect;
 type ProxyProps = typeof proxyHosts.$inferSelect;

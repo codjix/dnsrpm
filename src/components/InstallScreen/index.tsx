@@ -19,9 +19,9 @@ import { zodResolver } from "mantine-form-zod-resolver";
 import { Icon } from "@iconify/react";
 import zod from "zod";
 
-import logo from "#a/images/logo.svg";
+import logo from "@a/images/logo.svg";
 import classes from "./styles.module.scss";
-import AppInstall from "#/actions/install";
+import AppInstall from "@/actions/install";
 
 const InstallScreen = () => {
   const [loading, setLoading] = useState(false);

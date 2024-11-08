@@ -8,10 +8,10 @@ import { Icon } from "@iconify/react";
 
 import DnsForm from "./DnsForm";
 import ProxyForm from "./ProxyForm";
-import { _FormInfo } from "#/utils/validate.zod";
-import { StackCreate, StackUpdate } from "#/actions/StackControl";
-import Notify from "#h/Notify";
-import { HostCreate, HostUpdate } from "#/actions/HostControl";
+import { _FormInfo } from "@u/validate.zod";
+import { StackCreate, StackUpdate } from "@/actions/StackControl";
+import Notify from "@h/Notify";
+import { HostCreate, HostUpdate } from "@/actions/HostControl";
 
 type $FormInfo = {
   table: "proxy" | "dns";

@@ -2,4 +2,4 @@
 
 . /app-dist/prepare.sh
 
-bun --bun /app/server.js
+node /app/server.js

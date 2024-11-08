@@ -1,6 +1,6 @@
 "use server";
-import { db } from "#db/index";
-import { proxyHosts, proxyStacks, dnsHosts, dnsStacks } from "#db/schema";
+import { db } from "@db/index";
+import { proxyHosts, proxyStacks, dnsHosts, dnsStacks } from "@db/schema";
 
 const EnabledOptions = {
   where: (stack: Record<string, unknown>, { eq }) => eq(stack?.enabled, true),

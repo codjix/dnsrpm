@@ -3,9 +3,9 @@ import Link from "next/link";
 import { Box, Button, Flex, Group, Text } from "@mantine/core";
 import { useRouter } from "next/navigation";
 
-import { HostDel } from "#/actions/HostControl";
-import { StackDel } from "#/actions/StackControl";
-import Notify from "#h/Notify";
+import { HostDel } from "@/actions/HostControl";
+import { StackDel } from "@/actions/StackControl";
+import Notify from "@h/Notify";
 
 type FormDelProps = {
   table: "proxy" | "dns";

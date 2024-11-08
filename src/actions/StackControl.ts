@@ -1,31 +1,22 @@
 "use server";
 import { eq, sql } from "drizzle-orm";
 
-import { withPromise } from "#/utils/withPromise";
-import { dnsHosts, dnsStacks, proxyHosts, proxyStacks } from "#db/schema";
-import { db } from "#db/index";
+import { withPromise } from "@u/withPromise";
+import { dnsHosts, dnsStacks, proxyHosts, proxyStacks } from "@db/schema";
+import { db } from "@db/index";
 
-export const StackCreate = (
-  table: "dns" | "proxy",
-  data: { id?: number; name: string }
-) =>
+export const StackCreate = (table: "dns" | "proxy", data: { id?: number; name: string }) =>
   withPromise((resolve) => {
     const stack = table == "dns" ? dnsStacks : proxyStacks;
     db.insert(stack)
       .values({ name: data.name })
       .then(() => resolve({ ok: true, result: "Stack created successfully !" }))
       .catch((err) => {
-        const result = String(err.message).startsWith("UNIQUE")
-          ? "Stack already exist !"
-          : err.mesage;
-        resolve({ ok: false, result });
+        resolve({ ok: false, result: err.mesage });
       });
   });
 
-export const StackUpdate = (
-  table: "dns" | "proxy",
-  data: { id: number; name: string }
-) =>
+export const StackUpdate = (table: "dns" | "proxy", data: { id: number; name: string }) =>
   withPromise((resolve) => {
     const stack = table == "dns" ? dnsStacks : proxyStacks;
     db.update(stack)
@@ -41,11 +32,7 @@ export const StackUpdate = (
       .catch((err) => resolve({ ok: false, result: err.mesage }));
   });
 
-export const StackToggle = (
-  table: "dns" | "proxy",
-  id: number,
-  enabled: boolean
-) =>
+export const StackToggle = (table: "dns" | "proxy", id: number, enabled: boolean) =>
   withPromise((resolve) => {
     const stack = table == "dns" ? dnsStacks : proxyStacks;
     db.update(stack)
@@ -67,7 +54,7 @@ export const StackDel = (table: "dns" | "proxy", id: number) =>
     db.delete(stack)
       .where(eq(stack.id, id))
       .then(async (res: any) => {
-        db.delete(hosts).where(eq(hosts.stackId, id)).run();
+        db.delete(hosts).where(eq(hosts.stackId, id));
         if (res.changes > 0) {
           resolve({ ok: true, result: "Stack deleted successfully !" });
         } else {

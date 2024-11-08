@@ -1,10 +1,11 @@
 "use server";
 import { eq, sql } from "drizzle-orm";
-import RandomStr from "#/utils/RandomStr";
+import randstr from "@u/randstr";
 import isInstalled from "../install/isInstalled";
-import { _AppLogin } from "#/utils/validate.zod";
-import { users } from "#db/schema";
-import { db } from "#db/index";
+import { _AppLogin } from "@u/validate.zod";
+import { users } from "@db/schema";
+import { db } from "@db/index";
+import { compareSync } from "bcrypt";
 
 type $AppLogin = {
   email: string;
@@ -23,14 +24,10 @@ const AppLogin = (data: $AppLogin) =>
       });
       if (!user) throw new Error("Email not found.");
 
-      const validPass = Bun.password.verifySync(
-        credentials.password,
-        user.password,
-        "bcrypt"
-      );
+      const validPass = compareSync(credentials.password, user.password);
       if (!validPass) throw new Error("Invalid password.");
 
-      const token = RandomStr(36, "token_");
+      const token = randstr(36, "token_");
       db.update(users)
         .set({ token, updated: sql`CURRENT_TIMESTAMP` } as any)
         .where(eq(users.email, credentials.email))

@@ -1,6 +1,6 @@
 import { Icon } from "@iconify/react";
 import { Box, Divider, Title } from "@mantine/core";
-import EmptyBox from "#c/ui/EmptyBox";
+import EmptyBox from "@c/ui/EmptyBox";
 
 export const metadata = {
   title: "Settings | Dnsrpm",

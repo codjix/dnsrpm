@@ -3,8 +3,8 @@ import { Icon } from "@iconify/react";
 import { Overlay, Flex, Button, Image, ActionIcon, HoverCard, Stack, Text, CardProps } from "@mantine/core";
 
 import EmptyBox from "./EmptyBox";
-import { FormTrigger } from "#c/FormControl";
-import empty from "#a/images/empty.png";
+import { FormTrigger } from "@c/FormControl";
+import empty from "@a/images/empty.png";
 
 type $NoStacks = { target: "dns" | "proxy"; props?: CardProps };
 export const NoStacks = ({ target, props }: $NoStacks) => (

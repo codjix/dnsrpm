@@ -21,9 +21,9 @@ import { Icon } from "@iconify/react";
 import Cookies from "universal-cookie";
 import zod from "zod";
 
-import AppLogin from "#/actions/auth/login";
+import AppLogin from "@/actions/auth/login";
 import classes from "./styles.module.scss";
-import logo from "#a/images/logo.svg";
+import logo from "@a/images/logo.svg";
 
 const page = () => {
   const [loading, setLoading] = useState(false);

@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Button, Flex, Group, Stack, Text, Title } from "@mantine/core";
 
-import BackBtn from "#c/ui/BackBtn";
+import BackBtn from "@c/ui/BackBtn";
 
 export const metadata = {
   title: "Not Found | Dnsrpm",

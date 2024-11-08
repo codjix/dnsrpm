@@ -3,9 +3,9 @@ import Link from "next/link";
 import { Box, Button, Flex, Group, Text } from "@mantine/core";
 import { useRouter } from "next/navigation";
 
-import { StackToggle } from "#/actions/StackControl";
-import { HostToggle } from "#/actions/HostControl";
-import Notify from "#h/Notify";
+import { StackToggle } from "@/actions/StackControl";
+import { HostToggle } from "@/actions/HostControl";
+import Notify from "@h/Notify";
 
 type FormInfoProps = {
   table: "proxy" | "dns";

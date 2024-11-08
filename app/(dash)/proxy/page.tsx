@@ -2,10 +2,10 @@ import { Icon } from "@iconify/react";
 import { Badge, Box, Button, Card, Divider, Flex, Group, Stack, Text, Title } from "@mantine/core";
 
 import classes from "./styles.module.scss";
-import { GetProxyStacks } from "#/actions/GetStacks";
-import FormControl, { FormTrigger } from "#c/FormControl";
-import { NoStacks, StackDisabled, NoHosts, HoverMenu } from "#c/ui/PageUI";
-import CopyBtn from "#c/ui/CopyBtn";
+import { GetProxyStacks } from "@/actions/GetStacks";
+import FormControl, { FormTrigger } from "@c/FormControl";
+import { NoStacks, StackDisabled, NoHosts, HoverMenu } from "@c/ui/PageUI";
+import CopyBtn from "@c/ui/CopyBtn";
 
 export const revalidate = 0;
 export const metadata = {

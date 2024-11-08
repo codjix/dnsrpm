@@ -1,4 +1,4 @@
-import session from "#/actions/auth/session";
+import session from "@/actions/auth/session";
 
 export type $resolve = (result: { ok: boolean; result: any }) => void;
 export const withPromise = (callback: (r: $resolve) => void) =>

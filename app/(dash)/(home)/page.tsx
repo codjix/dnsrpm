@@ -3,8 +3,8 @@ import { Stack, Card, Divider, Text, Button, Group, Badge, Flex, Anchor, Box, Ti
 import { Icon } from "@iconify/react";
 
 import classes from "./styles.module.scss";
-import { GetAllStacks } from "#/actions/GetStacks";
-import { NoStacks } from "#c/ui/PageUI";
+import { GetAllStacks } from "@/actions/GetStacks";
+import { NoStacks } from "@c/ui/PageUI";
 
 export const revalidate = 0;
 export const metadata = {

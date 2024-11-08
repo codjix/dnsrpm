@@ -1,12 +1,12 @@
-import { $ProxyStack } from "#/actions/GetStacks";
+import { $ProxyStack } from "@/actions/GetStacks";
 import { Liquid } from "liquidjs";
 
 const ProxyWriter = (stacks: $ProxyStack[], targetDir: string) =>
   new Promise<boolean>(async (resolve) => {
     const engine = new Liquid();
     const confDir = `${targetDir}/nginx.d`;
-    await Bun.$`rm -rf ${confDir}`;
-    await Bun.$`mkdir -p ${confDir}`;
+    // $`rm -rf ${confDir}`;
+    // $`mkdir -p ${confDir}`;
 
     stacks.map((stack, index) =>
       stack.hosts.map((host) =>
@@ -14,9 +14,9 @@ const ProxyWriter = (stacks: $ProxyStack[], targetDir: string) =>
           .parseAndRender(template, { host })
           .then((content) => {
             const conf = `${confDir}/stack-${stack.id}-host-${host.id}.conf`;
-            Bun.write(conf, content)
-              .then(() => index === stacks.length - 1 && resolve(true))
-              .catch(() => resolve(false));
+            // .write(conf, content)
+            //   .then(() => index === stacks.length - 1 && resolve(true))
+            //   .catch(() => resolve(false));
           })
           .catch(() => resolve(false))
       )

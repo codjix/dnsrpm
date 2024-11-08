@@ -3,11 +3,11 @@ import { cookies } from "next/headers";
 import { ColorSchemeScript, createTheme, MantineProvider } from "@mantine/core";
 import { Notifications } from "@mantine/notifications";
 
-import InstallScreen from "#c/InstallScreen";
-import isInstalled from "#/actions/install/isInstalled";
+import InstallScreen from "@c/InstallScreen";
+import isInstalled from "@/actions/install/isInstalled";
 import "@mantine/core/styles.css";
 import "@mantine/notifications/styles.css";
-import "#a/styles/globals.scss";
+import "@a/styles/globals.scss";
 
 export const metadata = {
   title: "Dnsrpm",

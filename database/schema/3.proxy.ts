@@ -1,4 +1,4 @@
-import { MainCols } from "#db/schema";
+import { MainCols } from "@db/schema";
 import { sqliteTable, text, integer } from "drizzle-orm/sqlite-core";
 import { relations } from "drizzle-orm";
 

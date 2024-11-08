@@ -1,6 +1,6 @@
 "use server";
 import { cookies } from "next/headers";
-import { db } from "#db/index";
+import { db } from "@db/index";
 
 const session = async () => {
   const Co = cookies();

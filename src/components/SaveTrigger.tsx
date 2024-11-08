@@ -1,6 +1,6 @@
 "use client";
-import ApplyBackEnd from "#/actions/ApplyBackend";
-import Notify from "#h/Notify";
+import ApplyBackEnd from "@/actions/ApplyBackend";
+import Notify from "@h/Notify";
 import { Icon } from "@iconify/react";
 import { Button, Divider, Group, Modal, Stack, Text } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";

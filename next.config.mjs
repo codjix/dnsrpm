@@ -6,16 +6,12 @@ const nextConfig = {
   // reactStrictMode: false,
   images: { unoptimized: output == "standalone" },
   sassOptions: {
-    prependData: `@import "#a/styles/_mantine.scss";`,
+    prependData: `@import "@a/styles/_mantine.scss";`,
     includePaths: ["./src/assets/styles"],
   },
   experimental: {
     optimizePackageImports: ["@mantine/core", "@mantine/hooks"],
     serverSourceMaps: false,
-  },
-  webpack: (config) => {
-    config.externals.push("bun:sqlite");
-    return config;
   },
 };
 

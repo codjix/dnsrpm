@@ -1,9 +1,10 @@
 "use server";
 import { sql } from "drizzle-orm";
-import { settings, users } from "#db/schema";
-import { _AppInstall } from "#/utils/validate.zod";
-import RandomStr from "#/utils/RandomStr";
-import { db } from "#db/index";
+import { settings, users } from "@db/schema";
+import { _AppInstall } from "@u/validate.zod";
+import { hashSync } from "bcrypt";
+import randstr from "@u/randstr";
+import { db } from "@db/index";
 
 type $AppInstall = {
   name: string;
@@ -22,8 +23,8 @@ const AppInstall = (data: $AppInstall) =>
       if (!isInstalled) {
         const addAdmin = await db.insert(users).values({
           ...values,
-          password: Bun.password.hashSync(values.password, "bcrypt"),
-          token: RandomStr(36, "token_"),
+          password: hashSync(values.password, 10),
+          token: randstr(36, "token_"),
           updated: sql`CURRENT_TIMESTAMP`,
         } as any);
         const installed = await db.insert(settings).values({
