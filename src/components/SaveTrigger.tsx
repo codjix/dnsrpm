@@ -55,9 +55,7 @@ const SaveTrigger = ({ children }) => {
       <Modal opened={opened} onClose={close} title="Save Changes" centered>
         <Stack gap={20}>
           <Divider />
-          <Text>
-            Save the current configurations and apply them to the system.
-          </Text>
+          <Text>Save the current configurations and apply them to the system.</Text>
           <Group>
             <Button onClick={close} variant="default">
               Cancel

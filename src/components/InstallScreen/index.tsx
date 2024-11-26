@@ -59,7 +59,14 @@ const InstallScreen = () => {
   return (
     <>
       <Box className={classes.container} p={20}>
-        <Card component="form" onSubmit={Form.onSubmit(handleSubmit)} withBorder shadow="sm" pos="relative" w="100%">
+        <Card
+          component="form"
+          onSubmit={Form.onSubmit(handleSubmit)}
+          withBorder
+          shadow="sm"
+          pos="relative"
+          w="100%"
+        >
           <LoadingOverlay visible={loading} />
           <Box className={classes.box}>
             <Flex align="center" justify="center" direction="column">
@@ -70,7 +77,12 @@ const InstallScreen = () => {
             <Stack>
               <Title order={4}>Create Admin Acount</Title>
               {error && (
-                <Alert variant="light" color="red" title={error} icon={<Icon icon="tabler:info-circle" />} />
+                <Alert
+                  variant="light"
+                  color="red"
+                  title={error}
+                  icon={<Icon icon="tabler:info-circle" />}
+                />
               )}
               <TextInput
                 label="Name"
@@ -93,7 +105,13 @@ const InstallScreen = () => {
                 {...Form.getInputProps("password")}
                 withAsterisk
               />
-              <Button loading={loading} h="40px" w="120px" type="submit" rightSection={<Icon icon="tabler:send-2" />}>
+              <Button
+                loading={loading}
+                h="40px"
+                w="120px"
+                type="submit"
+                rightSection={<Icon icon="tabler:send-2" />}
+              >
                 Create
               </Button>
             </Stack>

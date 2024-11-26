@@ -39,7 +39,12 @@ const FormToggle = ({ table, target, action, data }: FormInfoProps) => {
       <Flex>
         <Group gap={10}>
           <Button component={Link} href={"/" + table} w={100} variant="default" children="No" />
-          <Button w={100} onClick={handleToggle} color={action == "disable" ? "red" : null} children="Yes" />
+          <Button
+            w={100}
+            onClick={handleToggle}
+            color={action == "disable" ? "red" : null}
+            children="Yes"
+          />
         </Group>
       </Flex>
     </Box>

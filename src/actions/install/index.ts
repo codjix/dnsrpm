@@ -2,7 +2,7 @@
 import { sql } from "drizzle-orm";
 import { settings, users } from "@db/schema";
 import { _AppInstall } from "@u/validate.zod";
-import { hashSync } from "bcrypt";
+import { hashSync } from "bcryptjs";
 import randstr from "@u/randstr";
 import { db } from "@db/index";
 

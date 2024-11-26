@@ -1,10 +1,23 @@
 "use client";
 import { Icon } from "@iconify/react";
-import { Checkbox, Divider, NumberInput, Select, Stack, Tabs, TagsInput, Textarea, TextInput } from "@mantine/core";
+import {
+  Checkbox,
+  Divider,
+  NumberInput,
+  Select,
+  Stack,
+  Tabs,
+  TagsInput,
+  Textarea,
+  TextInput,
+} from "@mantine/core";
 import { UseFormReturnType } from "@mantine/form";
 
 type $ProxyForm = {
-  Form: UseFormReturnType<Record<string, unknown>, (values: Record<string, unknown>) => Record<string, unknown>>;
+  Form: UseFormReturnType<
+    Record<string, unknown>,
+    (values: Record<string, unknown>) => Record<string, unknown>
+  >;
 };
 
 const ProxyForm = ({ Form }: $ProxyForm) => {
@@ -12,7 +25,10 @@ const ProxyForm = ({ Form }: $ProxyForm) => {
     <>
       <Tabs variant="pills" defaultValue="details">
         <Tabs.List>
-          <Tabs.Tab value="details" leftSection={<Icon width={20} icon="hugeicons:web-design-01" />}>
+          <Tabs.Tab
+            value="details"
+            leftSection={<Icon width={20} icon="hugeicons:web-design-01" />}
+          >
             Details
           </Tabs.Tab>
           <Tabs.Tab value="rewrites" leftSection={<Icon width={20} icon="mdi:routes" />}>

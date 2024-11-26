@@ -1,6 +1,15 @@
 "use client";
 import Link from "next/link";
-import { AppShell, Divider, Flex, ScrollArea, Text, Stack, NavLink, ActionIcon } from "@mantine/core";
+import {
+  AppShell,
+  Divider,
+  Flex,
+  ScrollArea,
+  Text,
+  Stack,
+  NavLink,
+  ActionIcon,
+} from "@mantine/core";
 import { usePathname } from "next/navigation";
 import { Icon } from "@iconify/react";
 
@@ -34,7 +43,11 @@ const NavBar = ({ menu, close }: $NavBar) => {
               {...{ href, label, onClick: close }}
               style={{ borderRadius: 10 }}
               leftSection={
-                <ActionIcon variant="transparent" color={pathname == href ? null : "gray"} size="lg">
+                <ActionIcon
+                  variant="transparent"
+                  color={pathname == href ? null : "gray"}
+                  size="lg"
+                >
                   <Icon height={25} icon={icon} />
                 </ActionIcon>
               }

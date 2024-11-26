@@ -1,6 +1,5 @@
 "use client";
 import { Card, CardProps, Flex, Group, Text, Title } from "@mantine/core";
-import { useMediaQuery } from "@mantine/hooks";
 
 type EmptyBoxProps = {
   icon: React.ReactNode;

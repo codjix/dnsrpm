@@ -73,12 +73,27 @@ const FormInfo = ({ table, target, action, data }: $FormInfo) => {
       <LoadingOverlay visible={loading} />
       <form onSubmit={Form.onSubmit(handleSubmit)}>
         <Stack gap={10} mt={10}>
-          {error && <Alert variant="light" color="red" title={error} icon={<Icon icon="tabler:info-circle" />} />}
-          {target == "stack" && (
-            <TextInput label="Stack name" placeholder="ex: website" {...Form.getInputProps("name")} />
+          {error && (
+            <Alert
+              variant="light"
+              color="red"
+              title={error}
+              icon={<Icon icon="tabler:info-circle" />}
+            />
           )}
-          {target == "host" && (table == "dns" ? <DnsForm Form={Form} /> : <ProxyForm Form={Form} />)}
-          <Button type="submit" onClick={() => (Form.isValid ? setError(null) : setError("Form is not valid !"))}>
+          {target == "stack" && (
+            <TextInput
+              label="Stack name"
+              placeholder="ex: website"
+              {...Form.getInputProps("name")}
+            />
+          )}
+          {target == "host" &&
+            (table == "dns" ? <DnsForm Form={Form} /> : <ProxyForm Form={Form} />)}
+          <Button
+            type="submit"
+            onClick={() => (Form.isValid ? setError(null) : setError("Form is not valid !"))}
+          >
             {action == "new" ? "Create" : "Update"}
           </Button>
         </Stack>

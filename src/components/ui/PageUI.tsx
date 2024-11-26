@@ -1,6 +1,16 @@
 "use client";
 import { Icon } from "@iconify/react";
-import { Overlay, Flex, Button, Image, ActionIcon, HoverCard, Stack, Text, CardProps } from "@mantine/core";
+import {
+  Overlay,
+  Flex,
+  Button,
+  Image,
+  ActionIcon,
+  HoverCard,
+  Stack,
+  Text,
+  CardProps,
+} from "@mantine/core";
 
 import EmptyBox from "./EmptyBox";
 import { FormTrigger } from "@c/FormControl";
@@ -82,7 +92,10 @@ export const HoverMenu = ({ table, target, data }: $HoverMenu) => {
               Edit {_target}
             </Button>
           </FormTrigger>
-          <FormTrigger to={`/${_table}?action=${data.enabled ? "disable" : "enable"}-${_target}`} data={data}>
+          <FormTrigger
+            to={`/${_table}?action=${data.enabled ? "disable" : "enable"}-${_target}`}
+            data={data}
+          >
             <Button
               fullWidth
               variant="default"

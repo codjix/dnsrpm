@@ -1,36 +1,31 @@
 import { $DnsStack } from "@/actions/GetStacks";
-import { Liquid } from "liquidjs";
+import { render } from "ejs";
+import $ from "@u/$";
 
 const DnsWriter = async (stacks: $DnsStack[], targetDir: string) =>
   new Promise<boolean>(async (resolve) => {
-    const engine = new Liquid();
     const confDir = `${targetDir}/dnsmasq.d`;
-    // $`rm -rf ${confDir}`;
-    // $`mkdir -p ${confDir}`;
+    await $(`rm -rf ${confDir}`);
+    await $(`mkdir -p ${confDir}`);
 
-    stacks.map((stack, index) =>
-      engine
-        .parseAndRender(template, { stack })
-        .then((content) => {
-          const conf = `${confDir}/stack-${stack.id}.conf`;
-          // .write(conf, content)
-          //   .then(() => index === stacks.length - 1 && resolve(true))
-          //   .catch(() => resolve(false));
-        })
-        .catch(() => resolve(false))
-    );
+    stacks.map(async (stack) => {
+      const conf = `${confDir}/stack-${stack.id}.conf`;
+      const content = await render(template, { stack }, { async: true });
+      await $(`printf "${content}" > ${conf}`);
+      // console.log(conf, content);
+    });
     resolve(true);
   });
 
 export default DnsWriter;
 
-const template = `# {{ stack.name }} Hosts
-# Created at {{ stack.created }}
-# Updated at {{ stack.updated }}
+const template = `# <%= stack.name %> Hosts
+# Created at <%= stack.created %>
+# Updated at <%= stack.updated %>
 
 # ========== Hosts ==========
-{% for host in stack.hosts %}
-# Host created at {{ host.created }}
-# Host updated at {{ host.updated }}
-address=/{{ host.domain }}/{{ host.ip }}
-{% endfor %}`;
+<% stack.hosts.forEach((host) => { %>
+# Host created at <%= host.created %>
+# Host updated at <%= host.updated %>
+address=/<%= host.domain %>/<%= host.ip %>
+<% }); %>`;

@@ -29,10 +29,22 @@ const AccountMenu = ({ user }: { user: User }) => {
               <Avatar w={30} src={user.avatar} />
               <Text>{user.name}</Text>
             </Flex>
-            <Button component={Link} variant="default" fullWidth href="/settings" leftSection={<Icon icon="tabler:settings" />}>
+            <Button
+              component={Link}
+              variant="default"
+              fullWidth
+              href="/settings"
+              leftSection={<Icon icon="tabler:settings" />}
+            >
               Settings
             </Button>
-            <Button component={Link} color="red" fullWidth href="/auth/logout" leftSection={<Icon icon="tabler:logout" />}>
+            <Button
+              component={Link}
+              color="red"
+              fullWidth
+              href="/auth/logout"
+              leftSection={<Icon icon="tabler:logout" />}
+            >
               Logout
             </Button>
           </Stack>

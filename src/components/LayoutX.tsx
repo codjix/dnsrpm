@@ -1,14 +1,5 @@
 "use client";
-import {
-  ActionIcon,
-  AppShell,
-  Button,
-  Container,
-  Flex,
-  Group,
-  rem,
-  Text,
-} from "@mantine/core";
+import { ActionIcon, AppShell, Button, Container, Flex, Group, rem, Text } from "@mantine/core";
 import { useEffect } from "react";
 import { useDisclosure, useHeadroom, useMediaQuery } from "@mantine/hooks";
 import { Icon } from "@iconify/react";
@@ -50,24 +41,17 @@ const LayoutX = ({ children, wideOpen, user }: $LayoutX) => {
     },
   };
 
-  const mMenu = (
-    <MenuIcon opened={mOpened} handlers={mHandlers} hiddenFrom="sm" />
-  );
+  const mMenu = <MenuIcon opened={mOpened} handlers={mHandlers} hiddenFrom="sm" />;
 
   const blur = {
-    background:
-      "color-mix(in srgb, var(--mantine-color-default), transparent 50%)",
+    background: "color-mix(in srgb, var(--mantine-color-default), transparent 50%)",
     backdropFilter: "blur(10px)",
   };
 
   return (
     <AppShell layout="alt" {...shellProps}>
       <AppShell.Header>
-        <Container
-          h="100%"
-          style={{ width: "100%", maxWidth: "1200px" }}
-          px={20}
-        >
+        <Container h="100%" style={{ width: "100%", maxWidth: "1200px" }} px={20}>
           <Group h="100%" justify="space-between" gap={10}>
             <Flex h="100%" align="center" gap={10}>
               <MenuIcon opened={wOpened} handlers={wHandlers} visbleFrom="sm" />
@@ -113,6 +97,7 @@ type $MenuIcon = {
     readonly toggle: () => void;
   };
 };
+
 const MenuIcon = ({ handlers, opened, hiddenFrom, visbleFrom }: $MenuIcon) => (
   <ActionIcon
     onClick={handlers.toggle}

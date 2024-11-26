@@ -5,7 +5,7 @@ import isInstalled from "../install/isInstalled";
 import { _AppLogin } from "@u/validate.zod";
 import { users } from "@db/schema";
 import { db } from "@db/index";
-import { compareSync } from "bcrypt";
+import { compareSync } from "bcryptjs";
 
 type $AppLogin = {
   email: string;

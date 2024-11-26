@@ -11,7 +11,12 @@ const Affix = () => {
       <MAffix position={{ bottom: 20, right: 20 }}>
         <Transition transition="slide-up" mounted={scroll.y > 0}>
           {(transitionStyles) => (
-            <ActionIcon size="xl" variant="default" style={transitionStyles} onClick={() => scrollTo({ y: 0 })}>
+            <ActionIcon
+              size="xl"
+              variant="default"
+              style={transitionStyles}
+              onClick={() => scrollTo({ y: 0 })}
+            >
               <Icon width={20} icon="tabler:arrow-up" />
             </ActionIcon>
           )}
